@@ -192,7 +192,7 @@ class AccountController extends BaseController{
 
 	public function about()
 	{
-		return View::make('about');
+//		return View::make('about');
 	}
 
 

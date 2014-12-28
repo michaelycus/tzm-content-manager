@@ -171,18 +171,38 @@ Route::group(array('before' => 'auth'), function(){
 		// Angular will handle both of those forms
 		// this ensures that a user can't access api/create or api/edit when there's nothing there
 		Route::resource('comments', 'CommentController', 
-			array('only' => array('index', 'store', 'destroy')));
+			array('only' => array('index', 'store', 'show', 'destroy')));
 
-		Route::resource('videos.comments', 'VideoCommentController');
+		//Route::resource('videos.comments', 'VideoCommentController');
 	});
+
+
 
 	/*
 	| ARTICLES
-	*/
-	Route::get('/artigos', array(
-		'as' => 'articles-available',
-		'uses' => 'ArticleController@getAvailable'
+	*/	
+	Route::controller("articles", "ArticleController", array(
+		'getAvailable'  => 'articles-available',
+		'postNew' 		=> 'articles-new',
+		'getTeste'		=> 'articles-teste'
 	));
+
+	// Route::get('/articles', array(
+	// 	'as' => 'articles-available',
+	// 	'uses' => 'ArticleController@getAvailable'
+	// ));
+
+	// Route::post('/articles/new', array(
+	// 	'as' => 'articles-new',
+	// 	'uses' => 'ArticleController@postNew'
+	// ));
+
+	// Route::get('/articles/teste', array(
+	// 	'as' => 'articles-teste',
+	// 	'uses' => 'ArticleController@getTeste'
+	// ));
+
+
 
 	/*
 	| USERS

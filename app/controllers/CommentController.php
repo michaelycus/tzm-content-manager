@@ -7,9 +7,12 @@ class CommentController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($media_type, $media_id)
 	{
-		return Response::json(Comment::get());
+		return Response::json(Comment::with('user')->where('media_type', '=', $media_type)
+												   ->where('media_id', '=', $mediaId)->get());
+
+		//return Response::json(Comment::get());
 	}
 
 
@@ -21,10 +24,11 @@ class CommentController extends \BaseController {
 	public function store()
 	{
 		Comment::create(array(
-			'video_id' => Input::get('video_id'),
-			'reply_to' => Input::get('reply_to'),
-			'user_id' => Auth::id(),
-			'message' => Input::get('message')		
+			'media_type'=> Input::get('media_type'),
+			'media_id' 	=> Input::get('media_id'),
+			'reply_to' 	=> Input::get('reply_to'),
+			'user_id' 	=> Auth::id(),
+			'message' 	=> Input::get('message')		
 		));
 
 		return Response::json(array('success' => true));

@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+
+
 @section('content')
 
 <script>
@@ -193,7 +195,7 @@
 				</div> <!-- / .panel-heading -->
 				<div class="tab-content">
 
-					<!-- Without padding -->
+					Without padding
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
 						<div class="panel-padding no-padding-vr">
 
@@ -201,7 +203,7 @@
 							<div class="thread">									
 								{{ '<img src="' . $video->thumbnail . '"  alt="" class="thread-avatar">' }}
 								<div class="thread-body">
-									<span class="thread-time">[[ Helpers::time_elapsed_string($video->created_at) ]]</span>
+									<span class="thread-time">{{ Helpers::time_elapsed_string($video->created_at) }}</span>
 									<a href="{{ URL::route('videos-details', $video->id) }}" class="thread-title">{{ $video->title }}</a>
 									<div class="thread-info">suggested by <a href="{{ URL::route('users-profile', $video->suggestedBy()['id']) }}" title="">{{ $video->suggestedBy()['firstname'] }}</a></div>
 								</div>
@@ -226,8 +228,6 @@
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
 						<div class="panel-padding no-padding-vr">
 
-							
-
 							<?php $tasks_label = unserialize(TASKS_TYPE_LABEL_DASHBOARD); ?>
 							@foreach ($last_tasks as $task)
 							<div class="thread">
@@ -239,8 +239,6 @@
 								</div>
 							</div>
 							@endforeach
-
-							
 
 						</div>
 					</div> <!-- / .panel-body -->
@@ -407,14 +405,6 @@
 	})
 	
 	window.PixelAdmin.start(init);
-
-	//angular
-
-	$scope.init = function() {
-	    $scope.a = 1;
-	    $scope.b = 2;
-	}
-	commentData.media_id=0
 </script>
 			
 @stop

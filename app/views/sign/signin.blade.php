@@ -110,7 +110,7 @@
 
 
 <!-- Get jQuery from Google CDN -->
-<!--[if !IE]> -->va
+<!--[if !IE]> -->
 	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
 <!-- <![endif]-->
 <!--[if lte IE 9]>

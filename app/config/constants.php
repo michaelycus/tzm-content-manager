@@ -1,5 +1,11 @@
 <?php
 
+define('MEDIA_TYPE_ARTICLE',        1);
+define('MEDIA_TYPE_ARTICLE_PANEL',  2);
+define('MEDIA_TYPE_VIDEO',          3);
+define('MEDIA_TYPE_VIDEO_PANEL',    4);
+
+
 define('VIDEO_FOR_APPROVAL',		  	 0);
 define('VIDEO_STATUS_TRANSLATING',   1);
 define('VIDEO_STATUS_SYNCHRONIZING', 2);

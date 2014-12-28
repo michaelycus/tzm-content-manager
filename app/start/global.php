@@ -87,7 +87,7 @@ require app_path().'/config/constants.php';
 App::missing(function($e) {
     $url = Request::fullUrl();
     Log::warning("404 for URL: $url");
-    return Response::view('about', array(), 404);
+    return Response::view('notfound', array(), 404);
 });
 
 // \Debugbar::disable();

@@ -16,12 +16,7 @@ class CreateArticlesTable extends Migration {
 			$table->increments('id');
 			$table->string('title', 255);
 			$table->string('link_wordpress', 255);
-			$table->string('link_extra', 255);
-			$table->integer('owner_id');
-			$table->integer('reviewer1_id');
-			$table->boolean('reviewer1_approval');
-			$table->integer('reviewer2_id');
-			$table->boolean('reviewer2_approval');
+			$table->string('link_extra', 255);			
 			$table->tinyInteger('status');
 			$table->timestamps();
 		});

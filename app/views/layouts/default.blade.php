@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>WeTranslate</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<meta http-equiv="pragma" content="no-cache" />
+	<!-- <meta http-equiv="pragma" content="no-cache" /> -->
 
 	<link rel="icon" href="{{ URL::asset('assets/images/favicon.png') }}" />
 
@@ -134,7 +134,7 @@
 					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
 				</li>
 				<li>
-					<a href="{{ URL::route('videos-translating') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
+					<a href="{{ URL::route('articles-teste') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
 				</li> 
 
 				
