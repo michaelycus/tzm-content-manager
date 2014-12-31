@@ -7,20 +7,20 @@ class AccountController extends BaseController{
 		if (Auth::check())
 		{
 			$data = array(
-			    'count_videos_trans'   => Video::where('status', '=', VIDEO_STATUS_TRANSLATING)->count(),
-			    'count_videos_synch'   => Video::where('status', '=', VIDEO_STATUS_SYNCHRONIZING)->count(),
-			    'count_videos_proof'   => Video::where('status', '=', VIDEO_STATUS_PROOFREADING)->count(),
-			    'count_videos_finish'  => Video::where('status', '=', VIDEO_STATUS_FINISHED)->count(),
+			    'count_videos_trans'   => 1;//Video::where('status', '=', VIDEO_STATUS_TRANSLATING)->count(),
+			    'count_videos_synch'   => 2;//Video::where('status', '=', VIDEO_STATUS_SYNCHRONIZING)->count(),
+			    'count_videos_proof'   => 3;//Video::where('status', '=', VIDEO_STATUS_PROOFREADING)->count(),
+			    'count_videos_finish'  => 4;//Video::where('status', '=', VIDEO_STATUS_FINISHED)->count(),
 
-			    'count_users'		   => User::where('auth', '!=', USER_NOT_AUTHORIZED)->count(),
-			    'count_user_trans'     => Auth::user()->translated_videos(),
-			    'count_user_synch'     => Auth::user()->synchronized_videos(),
-			    'count_user_proof'     => Auth::user()->proofreaded_videos(),
-			    'count_user_worked'    => Auth::user()->worked_in_videos(),
-			    'count_user_score'     => Auth::user()->score_total(),
+			    'count_users'		   => 10;//User::where('auth', '!=', USER_NOT_AUTHORIZED)->count(),
+			    'count_user_trans'     => 11;//Auth::user()->translated_videos(),
+			    'count_user_synch'     => 12;//Auth::user()->synchronized_videos(),
+			    'count_user_proof'     => 13;//Auth::user()->proofreaded_videos(),
+			    'count_user_worked'    => 14;//Auth::user()->worked_in_videos(),
+			    'count_user_score'     => 15;//Auth::user()->score_total(),
 
-			    'last_videos'		   => Video::where('status', '>', VIDEO_FOR_APPROVAL)->orderBy('id', 'desc')->take(10)->get(),
-			    'last_tasks'		   => Task::where('type', '>', TASK_SUGGESTED_VIDEO)->orderBy('id', 'desc')->take(10)->get(),			    
+			    'last_videos'		   => Video::where('status', '>=', MEDIA_VIDEO_AVAILABLE)->orderBy('id', 'desc')->take(10)->get(),
+			    'last_tasks'		   => Task::where('type', '>', TASK_VIDEO_ADDED)->orderBy('id', 'desc')->take(10)->get(),			    
 			);
 
 			return View::make('dashboard')->with($data);

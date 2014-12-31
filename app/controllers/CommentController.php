@@ -10,7 +10,7 @@ class CommentController extends \BaseController {
 	public function index($media_type, $media_id)
 	{
 		return Response::json(Comment::with('user')->where('media_type', '=', $media_type)
-												   ->where('media_id', '=', $mediaId)->get());
+												   ->where('media_id', '=', $media_id)->get());
 
 		//return Response::json(Comment::get());
 	}
@@ -60,6 +60,5 @@ class CommentController extends \BaseController {
 
 		return Response::json(array('success' => true));
 	}
-
 
 }

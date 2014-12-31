@@ -227,7 +227,7 @@ class VideoController extends BaseController {
 
 			$video->delete();
 
-			Comment::where('video_id', $video_id)->delete();
+			Comment::where('media_id', $video_id)->delete();
 			Task::where('video_id', $video_id)->delete();
 		}
 	}

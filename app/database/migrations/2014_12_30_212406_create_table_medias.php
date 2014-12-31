@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration {
+class CreateTableMedias extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateTasksTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tasks', function(Blueprint $table){
-			$table->increments('id');			
-			$table->integer('type');
-			$table->integer('user_id');
-			$table->integer('media_id');
+		Schema::create('medias', function(Blueprint $table){
+			$table->increments('id');
+			$table->integer('user_id');			
+			$table->tinyInteger('status');
+			$table->date('schedule');			
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreateTasksTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tasks');
+		Schema::drop('medias');
 	}
 
 }

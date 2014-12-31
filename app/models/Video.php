@@ -23,7 +23,7 @@ class Video extends Eloquent{
 		return User::find($task['user_id']);		
 	}
 
-	public function comments(){
-		return $this->hasMany('Comment');
+	public function comments(){		
+		return $this->hasMany('Comment','media_id')->where('media_type','=',MEDIA_TYPE_VIDEO);
 	}
 }

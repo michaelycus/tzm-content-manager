@@ -2,6 +2,11 @@
 
 @section('content')
 
+<script>
+	var media_id = 1;
+	var media_type = {{MEDIA_TYPE_ARTICLE}};
+</script>
+
 <div class="page-header">	
 	<h1><span class="text-light-gray">Artigos</span></h1>
 
@@ -14,52 +19,58 @@
 </div> <!-- / .page-header -->
 
 
-<div class="panel">
-	<div class="panel-heading">
-		<span class="panel-title">Para revisar</span>
-	</div>
-	<div class="panel-body">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Título</th>
-					<th>Links</th>
-					<th>Atividades</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach ($articles_available as $article)
-				<tr>					
-					<td><img src="{{ $article->action->user->photo }}" alt="{{ $article->action->user->firstname }}" class="user-list"></td>
-					<td> {{ $article->title }}</td>
-					<td>
-						@if ($article->link_wordpress != '')
-						<a href="{{ $article->link_wordpress }}" target="_blank"><span class="btn-label icon fa fa-wordpress"></span></a>
-						@endif
-						@if ($article->link_extra != '')
-						&nbsp;&nbsp;<a href="{{ $article->link_extra }}" target="_blank"><span class="btn-label icon fa fa-file-text-o"></span></a>
-						@endif
-					</td>
-					<td></td>
-					<td>
-						<a href="#" onclick="changeArticleId({{ $article->id }})" data-toggle="modal" data-target="#commentModal">
-							<small>6 <span class="btn-label icon fa fa-comment"></small>
-						</a>
-					</td>
-				</tr>				
-				@endforeach				
-			</tbody>
-		</table>
-	</div>
-</div>
+<div ng-app="commentApp" ng-controller="commentController">
 
+	<div class="panel">
+		<div class="panel-heading">
+			<span class="panel-title">Para revisar</span>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Título</th>
+						<th>Links</th>
+						<th>Atividades</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ($articles as $article)
+					@if ($article->status == ARTICLE_STATUS_AVAILABLE)
+					<tr>					
+						<td><img src="{{ $article->action->user->photo }}" alt="{{ $article->action->user->firstname }}" class="user-list"></td>
+						<td> {{ $article->title }}</td>
+						<td>
+							@if ($article->link_wordpress != '')
+							<a href="{{ $article->link_wordpress }}" target="_blank"><span class="btn-label icon fa fa-wordpress"></span></a>
+							@endif
+							@if ($article->link_extra != '')
+							&nbsp;&nbsp;<a href="{{ $article->link_extra }}" target="_blank"><span class="btn-label icon fa fa-file-text-o"></span></a>
+							@endif
+						</td>
+						<td></td>
+						<td>							
+							<a href="#"  onclick="changeArticleId({{ $article->id }})" ng-click="reload()" data-toggle="modal" data-target="#commentModal">
+								<small>{{ $article->num_comments }} <span class="btn-label icon fa fa-comment"></small>
+							</a>							
+						</td>
+					</tr>		
+					@endif		
+					@endforeach				
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 
 @include('articles.create')
 
 @include('articles.comments')
+
+</div>
+
 
 @stop
 
@@ -69,8 +80,9 @@
 
  	function changeArticleId(id)
  	{
- 		init_video_id = id;
+ 		media_id = id;
  	}	
+
 
 	init.push(function () {		
 

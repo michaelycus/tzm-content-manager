@@ -13,11 +13,10 @@ class CreateArticlesTable extends Migration {
 	public function up()
 	{
 		Schema::create('articles', function(Blueprint $table){
-			$table->increments('id');
+			$table->integer('media_id');
 			$table->string('title', 255);
 			$table->string('link_wordpress', 255);
-			$table->string('link_extra', 255);			
-			$table->tinyInteger('status');
+			$table->string('link_extra', 255);						
 			$table->timestamps();
 		});
 	}

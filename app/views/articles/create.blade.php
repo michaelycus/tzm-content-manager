@@ -37,9 +37,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="author_id" class="col-sm-2 control-label">Autor</label>
+						<label for="user_id" class="col-sm-2 control-label">Autor</label>
 						<div class="col-sm-10">							
-							<select class="form-control form-group-margin" name="author_id">
+							<select class="form-control form-group-margin" name="user_id">
 								@foreach ($users as $user)
 	                            <option value="{{$user->id}}" {{ ($user->id == Auth::id() ? 'selected' : '')}}>{{$user->firstname . ' ' . $user->lastname}}</option>
 	                            @endforeach								

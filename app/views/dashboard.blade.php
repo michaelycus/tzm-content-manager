@@ -262,11 +262,11 @@
 							<div class="comment">
 								<img src="{{ Auth::user()->photo() }}" alt="" class="comment-avatar">
 								<div class="comment-body">
-									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=0">
+									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=0;commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}}">
 										<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 										<div class="expanding-input-hidden" style="margin-top: 10px;">
 											<label class="checkbox-inline pull-left">
-												<input type="checkbox" class="px">													
+												<input type="checkbox" class="px">			@{{media_id}}										
 											</label>
 											<button type="submit" class="btn btn-primary pull-right">Leave Message</button>
 										</div>
@@ -302,7 +302,7 @@
 									</div>
 
 									<div class="comment-body" ng-show="$index == replyTo">
-										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=0">
+										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=0;commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}}">
 											<textarea class="form-control" rows="1" ng-model="commentData.reply_text"></textarea>
 											<div style="margin-top: 10px;">
 												<label class="checkbox-inline pull-left">
@@ -410,11 +410,17 @@
 
 	//angular
 
-	$scope.init = function() {
-	    $scope.a = 1;
-	    $scope.b = 2;
-	}
-	commentData.media_id=0
+	// $scope.init = function() {
+	//     //commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
+	//     //commentData.media_id=0;
+	//     //commentData.media_type=4;
+
+	//     $scope.commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
+	//     $scope.commentData.media_id={{MEDIA_TYPE_VIDEO_PANEL}};
+	//     //$scope.b = 2;
+	// }
+	// //commentData.media_id=0;
+	// //commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
 </script>
 			
 @stop

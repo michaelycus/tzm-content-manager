@@ -14,7 +14,8 @@
 	<link rel="icon" href="{{ URL::asset('assets/images/favicon.png') }}" />
 
 	<!-- Open Sans font from Google CDN -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+	<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css"> -->
+	<link href="{{ URL::asset('assets/temp/css.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin') }}" rel="stylesheet" type="text/css">
 
 	<!-- Pixel Admin's stylesheets -->
 	<link href="{{ URL::asset('assets/stylesheets/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,7 +26,8 @@
 	<link href="{{ URL::asset('assets/stylesheets/themes.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ URL::asset('assets/stylesheets/custom.css') }}" rel="stylesheet" type="text/css">
 
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+	<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>-->
+	<script src="{{ URL::asset('assets/temp/angular.min.js') }}"></script>
 
 	<script src="{{ URL::asset('angularjs/controllers/mainCtrl.js') }}"></script>
 	<script src="{{ URL::asset('angularjs/services/commentService.js') }}"></script>

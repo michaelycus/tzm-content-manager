@@ -1,9 +1,6 @@
-<script>
-	var media_id = 0;
-	var media_type = {{MEDIA_TYPE_ARTICLE}};
-</script>
 
-<div id="commentModal" class="modal fade animated bounceInDown" tabindex="-1" role="dialog" style="display: none;">
+
+<div id="commentModal" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -21,12 +18,13 @@
 					<div class="tab-content tab-content-bordered panel-padding">
 						<div class="widget-article-comments tab-pane panel no-padding no-border fade in active" id="profile-tabs-board">
 							
-							<div ng-app="commentApp" ng-controller="commentController">
+							<!-- <div ng-app="commentApp" ng-controller="commentController"> -->
 
 								<div class="comment">
 									<img src="{{ Auth::user()->photo() }}" alt="" class="comment-avatar">
+
 									<div class="comment-body">
-										<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=0">
+										<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=1;commentData.media_type={{MEDIA_TYPE_ARTICLE}}">
 											<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 											<div class="expanding-input-hidden" style="margin-top: 10px;">
 												<label class="checkbox-inline pull-left">
@@ -66,7 +64,7 @@
 										</div>
 
 										<div class="comment-body" ng-show="$index == replyTo">
-											<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=0">
+											<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=1;commentData.media_type={{MEDIA_TYPE_ARTICLE}}">
 												<textarea class="form-control" rows="1" ng-model="commentData.reply_text"></textarea>
 												<div style="margin-top: 10px;">
 													<label class="checkbox-inline pull-left">
@@ -96,7 +94,7 @@
 										</div> <!-- / .comment-body -->	
 									</div>									
 								</div>
-							</div>						
+							<!-- </div>						 -->
 						</div>
 					</div>
 				</div>

@@ -12,8 +12,7 @@ class CreateProfilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('profiles', function($table)
-        {
+		Schema::create('profiles', function($table){
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('username');

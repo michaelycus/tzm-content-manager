@@ -3,23 +3,35 @@ angular.module('mainCtrl', [])
 	.controller('commentController', function($scope, $http, Comment) {
 		// object to hold all the data for the new comment form
 		$scope.commentData = {};
-		$scope.commentData.replytext = '';
 
-		// loading variable to show the spinning loading icon
 		$scope.loading = true;
 		
 		// get all the comments first and bind it to the $scope.comments object
 		Comment.get(media_type, media_id)
 			.success(function(data) {
-				$scope.comments = data;				
+				$scope.comments = data;
 				$scope.loading = false;
 		});
+
+
+		$scope.reload = function() {
+			$scope.loading = true;
+
+			Comment.get(media_type, media_id)
+				.success(function(data) {
+					$scope.comments = data;
+					$scope.loading = false;
+			});
+		};	
+
 
 		// function to handle submitting the form
 		$scope.submitComment = function() {
 			$scope.loading = true;
 
 			$scope.commentData.reply_to = 0;
+
+			//$scope.commentData.media_type=4;
 
 			// save the comment. pass in comment data from the form
 			Comment.save($scope.commentData)
@@ -92,6 +104,7 @@ angular.module('mainCtrl', [])
 		$scope.replyComment = function(comment_id) {
 			$scope.replyTo = comment_id;		
 		};
+
 
 	})
 

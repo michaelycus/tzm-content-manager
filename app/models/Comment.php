@@ -1,7 +1,7 @@
 <?php
 
 class Comment extends Eloquent {        
-	protected $fillable = array('message', 'video_id', 'user_id', 'reply_to'); 
+	protected $fillable = array('message', 'media_type', 'media_id', 'user_id', 'reply_to'); 
 
 	public function user()
     {
