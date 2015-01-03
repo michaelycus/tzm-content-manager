@@ -3,12 +3,10 @@
 
 class Video extends Eloquent{
 	
-	use SoftDeletingTrait;
-
-	protected $fillable = array('title', 'duration', 'thumbnail', 'original_link', 'working_link', 'status' );
+		protected $fillable = array('title', 'duration', 'thumbnail', 'original_link', 'working_link', 'status' );
 
 	public function tasks() {
-		return $this->hasMany('Task');
+		return $this->hasMany('Task', 'media_id');
 	}
 
 	// public static function forApproval()
@@ -18,12 +16,12 @@ class Video extends Eloquent{
 
 	public function suggestedBy()
 	{
-		$task = $this->tasks()->where('type','=',TASK_SUGGESTED_VIDEO)->first();
+		$task = $this->tasks()->where('type','=',TASK_VIDEO_ADDED)->first();
 
 		return User::find($task['user_id']);		
 	}
 
 	public function comments(){		
-		return $this->hasMany('Comment','media_id')->where('media_type','=',MEDIA_TYPE_VIDEO);
+		return $this->hasMany('Comment');
 	}
 }

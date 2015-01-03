@@ -10,7 +10,6 @@
 	<h1><span class="text-light-gray">Videos / </span>{{ $status_label[$status] }}</h1>
 </div> <!-- / .page-header -->
 
-<?php Debugbar::info('teste'. $videos); ?>
 
 @foreach ($videos as $video)
 
@@ -115,9 +114,9 @@
 		$('div.tasks-panel').empty();
 
 		$('div.tasks-panel').each(function(index, value){
-		    var video_id = $(this).attr('id');
+		    var media_id = $(this).attr('id');
 		    var current_status = {{ $status }};
-		    var url = '<?php echo URL::to('/'); ?>' + '/videos/tasks/' + video_id + '/' + current_status;		
+		    var url = '<?php echo URL::to('/'); ?>' + '/videos/tasks/' + media_id + '/' + current_status;		
 			var div = $(this);
 
 		    $.get(url, function(data) {	                   	    	
@@ -126,24 +125,24 @@
 		});
 	}	
 
-	function setHelp(video_id, status)
+	function setHelp(media_id, status)
 	{
-		var url = '<?php echo URL::to('/'); ?>' + '/videos/help/' + video_id + '/' + status;
+		var url = '<?php echo URL::to('/'); ?>' + '/videos/help/' + media_id + '/' + status;
 		$.get(url, function(data) {
            refresh_videos();
 	    });			
 	}
 
-	function setStopHelp(video_id, status)
+	function setStopHelp(media_id, status)
 	{
-		var url = '<?php echo URL::to('/'); ?>' + '/videos/stophelp/' + video_id + '/' + status;
+		var url = '<?php echo URL::to('/'); ?>' + '/videos/stophelp/' + media_id + '/' + status;
 		$.get(url, function(data) {
            refresh_videos();
 	    });
 	}	
 
 	$('.confirm-move').on('click', function () {
-		var video_id = $(this).attr('data-video-id');
+		var media_id = $(this).attr('data-video-id');
 		var video_status = $(this).attr('data-status');		
 
 		var confirm_message = "Are you sure to move to the next stage?";
@@ -156,10 +155,10 @@
 			callback: function(result) {
 				if (result)
 				{
-					var url = '<?php echo URL::to('/'); ?>' + '/videos/move-to/' + video_id + '/' + video_status;
+					var url = '<?php echo URL::to('/'); ?>' + '/videos/move-to/' + media_id + '/' + video_status;
 					$.get(url, function(data) {					
 					   $.growl.notice({ title: "Well done!", message: "The video was moved to the next stage!" });
-			           $("div[data-panel-id='"+video_id+"']").slideUp("slow");
+			           $("div[data-panel-id='"+media_id+"']").slideUp("slow");
 				    });	
 				}							
 			},
@@ -168,17 +167,17 @@
 	});
 
 	$('.confirm-return').on('click', function () {
-		var video_id = $(this).attr('data-video-id');
+		var media_id = $(this).attr('data-video-id');
 		var video_status = $(this).attr('data-status');		
 		bootbox.confirm({
 			message: "Are you sure you want to return?",
 			callback: function(result) {
 				if (result)
 				{
-					var url = '<?php echo URL::to('/'); ?>' + '/videos/return-to/' + video_id + '/' + video_status;
+					var url = '<?php echo URL::to('/'); ?>' + '/videos/return-to/' + media_id + '/' + video_status;
 					$.get(url, function(data) {					
 					   $.growl.notice({ title: "Well done!", message: "The video was moved to the previous stage!" });
-			           $("div[data-panel-id='"+video_id+"']").slideUp("slow");
+			           $("div[data-panel-id='"+media_id+"']").slideUp("slow");
 				    });	
 				}							
 			},
@@ -186,17 +185,17 @@
 		});
 	});
 
-	function remove_video(video_id)
+	function remove_video(media_id)
 	{
 		bootbox.confirm({
 			message: "Are you sure you want to remove this video?",
 			callback: function(result) {
 				if (result)
 				{
-					var url = '<?php echo URL::to('/'); ?>' + '/videos/remove/' + video_id;
+					var url = '<?php echo URL::to('/'); ?>' + '/videos/remove/' + media_id;
 					$.get(url, function(data) {					
 					   $.growl.notice({ title: "Ok!", message: "The video was removed!" });
-			           $("div[data-panel-id='"+video_id+"']").slideUp("slow");
+			           $("div[data-panel-id='"+media_id+"']").slideUp("slow");
 				    });	
 				}							
 			},

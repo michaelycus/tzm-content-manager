@@ -3,8 +3,8 @@ angular.module('commentService', [])
 	.factory('Comment', function($http) {
 
 		return {
-			get : function(media_type, media_id) {
-				return $http.get('/api/comments/' + media_type + '/' + media_id);
+			get : function(media_id) {
+				return $http.get('/api/comments/' + media_id);
 			},
 			show : function(id) {
 				return $http.get('/api/comments/' + id);

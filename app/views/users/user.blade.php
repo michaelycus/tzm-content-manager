@@ -87,7 +87,7 @@
 								    <img src="{{ $task->user->photo() }}" alt="" class="rounded" style=" width: 20px;height: 20px;margin-top: -2px;">					 
 									{{ $task->user->firstname . ' ' . $tasks_label[$task->type] }}
 									@if ($task->video)
-									the video <a href="{{ URL::route('videos-details', $task->video_id) }}">{{ $task->video->title }} </a> 
+									the video <a href="{{ URL::route('videos-details', $task->media_id) }}">{{ $task->video->title }} </a> 
 									@else
 									an video.
 									@endif 

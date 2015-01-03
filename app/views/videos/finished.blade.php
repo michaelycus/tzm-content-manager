@@ -67,17 +67,17 @@
 
 <script type="text/javascript">
 	$('.confirm-return').on('click', function () {
-		var video_id = $(this).attr('data-video-id');
+		var media_id = $(this).attr('data-video-id');
 		var video_status = $(this).attr('data-status');		
 		bootbox.confirm({
 			message: "Are you sure?",
 			callback: function(result) {
 				if (result)
 				{					
-					var url = '<?php echo URL::to('/'); ?>' + '/videos/return-to/' + video_id + '/' + video_status;
+					var url = '<?php echo URL::to('/'); ?>' + '/videos/return-to/' + media_id + '/' + video_status;
 					$.get(url, function(data) {					
 						$.growl.notice({ title: "Well done!", message: "The video was moved to the previous stage!" });
-			            $("tr[data-video-id='"+video_id+"']").slideUp("slow");
+			            $("tr[data-video-id='"+media_id+"']").slideUp("slow");
 				    });	
 				}							
 			},

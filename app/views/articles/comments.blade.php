@@ -24,7 +24,8 @@
 									<img src="{{ Auth::user()->photo() }}" alt="" class="comment-avatar">
 
 									<div class="comment-body">
-										<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=1;commentData.media_type={{MEDIA_TYPE_ARTICLE}}">
+										<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=1">
+										<!-- <form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()"> -->
 											<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 											<div class="expanding-input-hidden" style="margin-top: 10px;">
 												<label class="checkbox-inline pull-left">
@@ -64,7 +65,8 @@
 										</div>
 
 										<div class="comment-body" ng-show="$index == replyTo">
-											<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=1;commentData.media_type={{MEDIA_TYPE_ARTICLE}}">
+											<!-- <form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=1"> -->
+											<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)">
 												<textarea class="form-control" rows="1" ng-model="commentData.reply_text"></textarea>
 												<div style="margin-top: 10px;">
 													<label class="checkbox-inline pull-left">

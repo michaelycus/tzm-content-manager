@@ -7,7 +7,7 @@ class VideoController extends BaseController {
 		$videos = Video::where('status', '=', VIDEO_STATUS_TRANSLATING)->get();
 
 		foreach ($videos as $video) {
-			$video->tasks = Task::where('video_id', '=', $video->id)->orderBy('user_id')->get();
+			$video->tasks = Task::where('media_id', '=', $video->id)->orderBy('user_id')->get();
 		}
 
 		return View::make('videos.status', array('videos' => $videos,
@@ -41,17 +41,17 @@ class VideoController extends BaseController {
 	public function getDetails($id)
 	{
 		$video = Video::find($id);
-		$tasks = Task::where('video_id', '=', $id)->orderBy('id', 'desc')->get();
+		$tasks = Task::where('media_id', '=', $id)->orderBy('id', 'desc')->get();
 
 		return View::make('videos.details', array('video' => $video,
 												  'tasks' => $tasks));
 	}	
 
-	public function getTasks($video_id, $status)
+	public function getTasks($media_id, $status)
 	{
 		if (Request::ajax())
 		{
-		    $tasks = Task::where('video_id', '=', $video_id)->orderBy('id')->get();
+		    $tasks = Task::where('media_id', '=', $media_id)->orderBy('id')->get();
 
 			$icons = unserialize (IMG_VIDEO_STATUS);
 
@@ -84,22 +84,22 @@ class VideoController extends BaseController {
 
 			if ($is_helping)
 			{
-				$text .= '<button class="btn btn-flat btn-sm btn-labeled btn-danger" onclick="setStopHelp('.$video_id.','.$status.')"><span class="btn-label icon fa fa-times-circle"></span>Stop helping!</button>';
+				$text .= '<button class="btn btn-flat btn-sm btn-labeled btn-danger" onclick="setStopHelp('.$media_id.','.$status.')"><span class="btn-label icon fa fa-times-circle"></span>Stop helping!</button>';
 			}
 			else
 			{
-				$text .= '<button class="btn btn-flat btn-sm btn-labeled btn-success" onclick="setHelp('.$video_id.','.$status.')"><span class="btn-label icon fa fa-check-circle"></span>I want to help!</button>';	
+				$text .= '<button class="btn btn-flat btn-sm btn-labeled btn-success" onclick="setHelp('.$media_id.','.$status.')"><span class="btn-label icon fa fa-check-circle"></span>I want to help!</button>';	
 			}
 
 			return $text;
 		}		
 	}
 
-	public function getDetailTasks($video_id, $status)
+	public function getDetailTasks($media_id, $status)
 	{
 		if (Request::ajax())
 		{
-		    $tasks = Task::where('video_id', '=', $video_id)->orderBy('id')->get();
+		    $tasks = Task::where('media_id', '=', $media_id)->orderBy('id')->get();
 
 			$icons = unserialize (IMG_VIDEO_STATUS);
 
@@ -140,11 +140,11 @@ class VideoController extends BaseController {
 			{
 				if ($is_helping)
 				{
-					$text .= '<div class="text-center"><button class="btn btn-flat btn-sm btn-labeled btn-danger" onclick="setStopHelp('.$video_id.','.$status.')"><span class="btn-label icon fa fa-times-circle"></span>Stop helping!</button></div>';
+					$text .= '<div class="text-center"><button class="btn btn-flat btn-sm btn-labeled btn-danger" onclick="setStopHelp('.$media_id.','.$status.')"><span class="btn-label icon fa fa-times-circle"></span>Stop helping!</button></div>';
 				}
 				else
 				{
-					$text .= '<div class="text-center"><button class="btn btn-flat btn-sm btn-labeled btn-success" onclick="setHelp('.$video_id.','.$status.')"><span class="btn-label icon fa fa-check-circle"></span>I want to help!</button></div>';	
+					$text .= '<div class="text-center"><button class="btn btn-flat btn-sm btn-labeled btn-success" onclick="setHelp('.$media_id.','.$status.')"><span class="btn-label icon fa fa-check-circle"></span>I want to help!</button></div>';	
 				}
 			}			
 
@@ -152,31 +152,31 @@ class VideoController extends BaseController {
 		}		
 	}
 
-	public function getHelp($video_id, $status)
+	public function getHelp($media_id, $status)
 	{
 		if (Request::ajax())
 		{
 			Task::create(array(
 				'type' => $status,
 				'user_id' => Auth::id(),
-				'video_id' => $video_id
+				'media_id' => $media_id
 			));
 		}
 	}
 
-	public function getStopHelp($video_id, $status)
+	public function getStopHelp($media_id, $status)
 	{
 		if (Request::ajax())
 		{
-			$task = Task::whereRaw('video_id = '.$video_id.' and type = '. $status . ' and user_id = '. Auth::id() )->first();			
+			$task = Task::whereRaw('media_id = '.$media_id.' and type = '. $status . ' and user_id = '. Auth::id() )->first();			
 
 			$task->delete();
 		}
 	}
 
-	public function getMoveTo($video_id, $status)
+	public function getMoveTo($media_id, $status)
 	{
-		$video = Video::find($video_id);
+		$video = Video::find($media_id);
 		$video->status = $status;
 		$video->save();
 
@@ -186,20 +186,20 @@ class VideoController extends BaseController {
 			case VIDEO_STATUS_PROOFREADING:
 				$status = TASK_ADVANCE_TO_PROOF; break;
 			case VIDEO_STATUS_FINISHED:
-				$this->addScore($video_id);
+				$this->addScore($media_id);
 				$status = TASK_FINISHED_VIDEO; break;
 		}
 
 		Task::create(array(
 			'type' => $status,
 			'user_id' => Auth::id(),
-			'video_id' => $video_id
+			'media_id' => $media_id
 		));
 	}
 
-	public function getReturnTo($video_id, $status)
+	public function getReturnTo($media_id, $status)
 	{
-		$video = Video::find($video_id);
+		$video = Video::find($media_id);
 		$video->status = $status;
 		$video->save();
 
@@ -215,20 +215,20 @@ class VideoController extends BaseController {
 		Task::create(array(
 			'type' => $status,
 			'user_id' => Auth::id(),
-			'video_id' => $video_id
+			'media_id' => $media_id
 		));
 	}
 
-	public function getRemove($video_id)
+	public function getRemove($media_id)
 	{
 		if (Request::ajax())
 		{
-			$video = Video::find($video_id);
+			$video = Video::find($media_id);
 
 			$video->delete();
 
-			Comment::where('media_id', $video_id)->delete();
-			Task::where('video_id', $video_id)->delete();
+			Comment::where('media_id', $media_id)->delete();
+			Task::where('media_id', $media_id)->delete();
 		}
 	}
 
@@ -257,9 +257,9 @@ class VideoController extends BaseController {
 				}
 			}
 			elseif (strpos($video_url,'vimeo') !== false) {
-				$video_id =  substr(parse_url($video_url, PHP_URL_PATH), 1);
+				$media_id =  substr(parse_url($video_url, PHP_URL_PATH), 1);
 
-				$json_data = file_get_contents("http://vimeo.com/api/v2/video/".$video_id.'.json');
+				$json_data = file_get_contents("http://vimeo.com/api/v2/video/".$media_id.'.json');
 				$json = json_decode($json_data);
 						
 				$video_title			= $json[0]->title;
@@ -303,9 +303,9 @@ class VideoController extends BaseController {
 				));
 
 				Task::create(array(
-					'type' => TASK_SUGGESTED_VIDEO,
+					'type' => TASK_VIDEO_ADDED,
 					'user_id' => Auth::id(),
-					'video_id' => $video->id
+					'media_id' => $video->id
 				));
 
 			  Session::flash('success', 'Your suggestion is now avaliable for translation!');
@@ -315,10 +315,10 @@ class VideoController extends BaseController {
 		Session::flash('fail', 'Oh span! Something went wrong. Check your link and try again later!');
 	}
 
-	private function addScore($video_id)
+	private function addScore($media_id)
 	{
 		// get tasks of the video
-		$tasks = Task::where('video_id', '=', $video_id)->orderBy('id')->get();
+		$tasks = Task::where('media_id', '=', $media_id)->orderBy('id')->get();
 
 		$user_task = array();
 		foreach ($tasks as $task) {
@@ -341,7 +341,7 @@ class VideoController extends BaseController {
 		}
 
 		// get video info
-		$video = Video::find($video_id);
+		$video = Video::find($media_id);
 
 		$duration_points = $video->duration / 60;
 

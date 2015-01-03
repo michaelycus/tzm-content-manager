@@ -3,8 +3,7 @@
 @section('content')
 
 <script>
-	var media_id = 0;
-	var media_type = {{MEDIA_TYPE_VIDEO_PANEL}};
+	//var media_id = 0;	
 </script>
 
 <div id="content-wrapper">
@@ -74,8 +73,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 
 	<div class="row">
@@ -233,9 +230,9 @@
 							<div class="thread">
 								<img src="{{ $task->user->photo() }}" alt="" class="thread-avatar">
 								<div class="thread-body">
-									<span class="thread-time">{{ Helpers::time_elapsed_string($task->created_at) }}</span>
+									<span class="thread-time">[[ Helpers::time_elapsed_string($task->created_at) ]]</span>
 									<a href="{{ URL::route('users-profile', $task->user->id )}}" title="">{{ $task->user->firstname }}</a> {{ $tasks_label[$task->type] }}										
-									<div class="thread-info">the video <a href="{{ URL::route('videos-details', $task->video_id) }}" title="">{{ $task->video->title }}</a></div>
+									<div class="thread-info">the video <a href="{{ URL::route('videos-details', $task->media_id) }}" title="">{{ $task->video->title }}</a></div>
 								</div>
 							</div>
 							@endforeach
@@ -262,7 +259,7 @@
 							<div class="comment">
 								<img src="{{ Auth::user()->photo() }}" alt="" class="comment-avatar">
 								<div class="comment-body">
-									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=0;commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}}">
+									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id=0">
 										<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 										<div class="expanding-input-hidden" style="margin-top: 10px;">
 											<label class="checkbox-inline pull-left">
@@ -302,7 +299,7 @@
 									</div>
 
 									<div class="comment-body" ng-show="$index == replyTo">
-										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=0;commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}}">
+										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id=0">
 											<textarea class="form-control" rows="1" ng-model="commentData.reply_text"></textarea>
 											<div style="margin-top: 10px;">
 												<label class="checkbox-inline pull-left">
@@ -363,10 +360,6 @@
 			});
 	}
 
-	function replyComment(id){
-		alert('id = ' + id);
-		//$('#comment_' + id).append("<strong>testes</strong>");
-	}
 
 	init.push(function () {
 		$('#profile-tabs').tabdrop();
@@ -408,19 +401,6 @@
 	
 	window.PixelAdmin.start(init);
 
-	//angular
-
-	// $scope.init = function() {
-	//     //commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
-	//     //commentData.media_id=0;
-	//     //commentData.media_type=4;
-
-	//     $scope.commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
-	//     $scope.commentData.media_id={{MEDIA_TYPE_VIDEO_PANEL}};
-	//     //$scope.b = 2;
-	// }
-	// //commentData.media_id=0;
-	// //commentData.media_type={{MEDIA_TYPE_VIDEO_PANEL}};
 </script>
 			
 @stop

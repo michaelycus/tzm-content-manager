@@ -136,7 +136,7 @@
 					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
 				</li>
 				<li>
-					<a href="{{ URL::route('articles-teste') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
+					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
 				</li> 
 
 				

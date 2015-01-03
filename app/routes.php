@@ -88,12 +88,12 @@ Route::group(array('before' => 'auth'), function(){
 	| VIDEOS - Ajax calls
 	*/
 
-	Route::get('/videos/tasks/{video_id}/{status}', array(
+	Route::get('/videos/tasks/{media_id}/{status}', array(
 		'as' => 'videos-tasks',
 		'uses' => 'VideoController@getTasks'
 	));
 
-	Route::get('/videos/detail-tasks/{video_id}/{status}', array(
+	Route::get('/videos/detail-tasks/{media_id}/{status}', array(
 		'as' => 'videos-detail-tasks',
 		'uses' => 'VideoController@getDetailTasks'
 	));
@@ -128,39 +128,6 @@ Route::group(array('before' => 'auth'), function(){
 	 	'uses' => 'VideoController@postSuggestion'
 	 ));
 
- 	/*
-	| VIDEOS - Suggest, verify, approve
-	*/	
-
-	// Route::get('/videos/suggest', array(
-	// 	'as' => 'videos-suggest',
-	// 	'uses' => 'VideoController@getSuggest'
-	// ));
-
-	// Route::post('/videos/suggest', array(
-	// 	'as' => 'videos-suggest-post',
-	// 	'uses' => 'VideoController@postSuggest'
-	// ));
-
-	// Route::get('/videos/verify/{id}', array(
-	// 	'as' => 'videos-verify',
-	// 	'uses' => 'VideoController@getVerify'
-	// ));
-
-	// Route::post('/videos/verify/{id}', array(
-	// 	'as' => 'videos-verify-post',
-	// 	'uses' => 'VideoController@postVerify'
-	// ));
-
-	// Route::get('/videos/for-approval', array(
-	// 	'as' => 'videos-for-approval',
-	// 	'uses' => 'VideoController@getForApproval'
-	// ));
-
-	// Route::post('/videos/for-approval', array(
-	// 	'as' => 'videos-for-approval-post',
-	// 	'uses' => 'VideoController@postForApproval'
-	// ));
 
 	/*
 	| COMMENTS
@@ -174,7 +141,7 @@ Route::group(array('before' => 'auth'), function(){
 		// Route::resource('comments', 'CommentController', 
 		// 	array('only' => array('index', 'store', 'show', 'destroy')));
 
-		Route::get('/comments/{media_type}/{media_id}', array(
+		Route::get('/comments/{media_id}', array(
 			'as' => 'get-comments',
 			'uses' => 'CommentController@index'
 		));
@@ -196,8 +163,7 @@ Route::group(array('before' => 'auth'), function(){
 	*/	
 	Route::controller("articles", "ArticleController", array(
 		'getAvailable'  => 'articles-available',
-		'postNew' 		=> 'articles-new',
-		'getTeste'		=> 'articles-teste'
+		'postNew' 		=> 'articles-new',		
 	));
 
 	// Route::get('/articles', array(
@@ -293,8 +259,6 @@ Route::group(array('before' => 'guest'), function(){
 		'as' => 'account-activate',
 		'uses' => 'AccountController@getActivate'
 	));
-
-
 
 
 	/*

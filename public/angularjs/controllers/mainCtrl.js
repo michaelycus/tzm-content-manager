@@ -7,17 +7,19 @@ angular.module('mainCtrl', [])
 		$scope.loading = true;
 		
 		// get all the comments first and bind it to the $scope.comments object
-		Comment.get(media_type, media_id)
+		Comment.get(media_id)
 			.success(function(data) {
 				$scope.comments = data;
 				$scope.loading = false;
 		});
 
 
-		$scope.reload = function() {
+		$scope.reload = function(id) {
 			$scope.loading = true;
 
-			Comment.get(media_type, media_id)
+			$scope.commentData.media_id = id;
+
+			Comment.get(media_id)
 				.success(function(data) {
 					$scope.comments = data;
 					$scope.loading = false;
@@ -31,14 +33,12 @@ angular.module('mainCtrl', [])
 
 			$scope.commentData.reply_to = 0;
 
-			//$scope.commentData.media_type=4;
-
 			// save the comment. pass in comment data from the form
 			Comment.save($scope.commentData)
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the comment list
-					Comment.get(media_type, media_id)
+					Comment.get(media_id)
 						.success(function(getData) {
 							$scope.comments = getData;
 							$scope.commentData.message = '';
@@ -64,7 +64,7 @@ angular.module('mainCtrl', [])
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the comment list
-					Comment.get(media_type, media_id)
+					Comment.get(media_id)
 						.success(function(getData) {
 							$scope.comments = getData;
 							$scope.commentData.message = '';
@@ -74,7 +74,7 @@ angular.module('mainCtrl', [])
 				})
 				.error(function(data) {
 					console.log(data);
-				});
+			});
 		};
 
 
@@ -86,7 +86,7 @@ angular.module('mainCtrl', [])
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the comment list
-					Comment.get(media_type,media_id)
+					Comment.get(media_id)
 						.success(function(getData) {
 							$scope.comments = getData;
 							$scope.loading = false;

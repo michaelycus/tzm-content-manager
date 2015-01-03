@@ -25,6 +25,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $fillable = array('email', 'firstname', 'lastname', 'password', 'password_temp', 'code', 'auth');
 
+     public function media()
+     {
+        return belongsTo('Media');
+     }
+
 	public function profiles()
     {
         return $this->hasMany('Profile');

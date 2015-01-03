@@ -2,7 +2,7 @@
 
 class Task extends Eloquent{
 	
-	protected $fillable = array('video_id', 'user_id', 'type');
+	protected $fillable = array('media_id', 'user_id', 'type');
 
 
 	public function user()
@@ -12,6 +12,6 @@ class Task extends Eloquent{
 
     public function video()
     {
-    	return $this->belongsTo('Video');
+    	return $this->belongsTo('Video', 'media_id');
     }
 }

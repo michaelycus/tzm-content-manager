@@ -1,14 +1,3 @@
-@extends('layouts.default')
-
-
-
-@section('content')
-
-<script>
-	var media_id = 0;
-	var media_type = {{MEDIA_TYPE_VIDEO_PANEL}};
-</script>
-
 <div id="content-wrapper">
 	<div class="page-header">
 		
@@ -76,8 +65,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 
 	<div class="row">
@@ -195,7 +182,7 @@
 				</div> <!-- / .panel-heading -->
 				<div class="tab-content">
 
-					Without padding
+					<!-- Without padding -->
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
 						<div class="panel-padding no-padding-vr">
 
@@ -203,7 +190,7 @@
 							<div class="thread">									
 								{{ '<img src="' . $video->thumbnail . '"  alt="" class="thread-avatar">' }}
 								<div class="thread-body">
-									<span class="thread-time">{{ Helpers::time_elapsed_string($video->created_at) }}</span>
+									<span class="thread-time">[[ Helpers::time_elapsed_string($video->created_at) ]]</span>
 									<a href="{{ URL::route('videos-details', $video->id) }}" class="thread-title">{{ $video->title }}</a>
 									<div class="thread-info">suggested by <a href="{{ URL::route('users-profile', $video->suggestedBy()['id']) }}" title="">{{ $video->suggestedBy()['firstname'] }}</a></div>
 								</div>
@@ -228,17 +215,21 @@
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
 						<div class="panel-padding no-padding-vr">
 
+							
+
 							<?php $tasks_label = unserialize(TASKS_TYPE_LABEL_DASHBOARD); ?>
 							@foreach ($last_tasks as $task)
 							<div class="thread">
 								<img src="{{ $task->user->photo() }}" alt="" class="thread-avatar">
 								<div class="thread-body">
-									<span class="thread-time">{{ Helpers::time_elapsed_string($task->created_at) }}</span>
+									<span class="thread-time">[[ Helpers::time_elapsed_string($task->created_at) ]]</span>
 									<a href="{{ URL::route('users-profile', $task->user->id )}}" title="">{{ $task->user->firstname }}</a> {{ $tasks_label[$task->type] }}										
 									<div class="thread-info">the video <a href="{{ URL::route('videos-details', $task->video_id) }}" title="">{{ $task->video->title }}</a></div>
 								</div>
 							</div>
 							@endforeach
+
+							
 
 						</div>
 					</div> <!-- / .panel-body -->
@@ -264,7 +255,7 @@
 										<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 										<div class="expanding-input-hidden" style="margin-top: 10px;">
 											<label class="checkbox-inline pull-left">
-												<input type="checkbox" class="px">													
+												<input type="checkbox" class="px">			@{{media_id}}										
 											</label>
 											<button type="submit" class="btn btn-primary pull-right">Leave Message</button>
 										</div>
@@ -339,72 +330,3 @@
 
 	</div>
 </div>	
-
-@stop
-
-
-@section('script')
-
-<script type="text/javascript">
-	function openSuggestionPanel(){
-		$('#suggestionPanel').toggle(200);
-	}
-
-	function suggestVideo(){
-		var url = '<?php echo URL::to('/'); ?>' + '/videos/suggestion';		
-		var video_url = $('#original_link').val();
-
-		$('#processing').append('Processing... <i class="fa fa-refresh fa-spin"></i>');
-		$.post( url, { original_link: video_url})
-			.done(function(data){				
-				window.location.reload(true);
-			});
-	}
-
-	function replyComment(id){
-		alert('id = ' + id);
-		//$('#comment_' + id).append("<strong>testes</strong>");
-	}
-
-	init.push(function () {
-		$('#profile-tabs').tabdrop();
-
-		$("#leave-comment-form").expandingInput({
-			target: 'textarea',
-			hidden_content: '> div',
-			placeholder: 'Write message',
-			onAfterExpand: function () {
-				$('#leave-comment-form textarea').attr('rows', '3').autosize();
-			}
-		});
-
-		var regYoutube = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-		var regVimeo = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
-
-		$.validator.addMethod(
-			"valid_video_url",
-			function(value, element) {
-				return regYoutube.test(value) || regVimeo.test(value);
-			},
-			"The url informed is not valid."
-		);
-
-		// Setup validation
-		$("#suggestion-form").validate({
-			ignore: '.ignore, .select2-input',
-			focusInvalid: false,
-			rules: {
-				'original_link': {
-					required: true,
-					url: true,
-					valid_video_url: true
-				}
-			}
-		});
-
-	})
-	
-	window.PixelAdmin.start(init);
-</script>
-			
-@stop

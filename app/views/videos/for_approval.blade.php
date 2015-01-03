@@ -37,17 +37,17 @@
 @section('script')
 
 <script type="text/javascript">
-	function remove_video(video_id)
+	function remove_video(media_id)
 	{
 		bootbox.confirm({
 			message: "Are you sure you want to remove this video?",
 			callback: function(result) {
 				if (result)
 				{
-					var url = '<?php echo URL::to('/'); ?>' + '/videos/remove/' + video_id;
+					var url = '<?php echo URL::to('/'); ?>' + '/videos/remove/' + media_id;
 					$.get(url, function(data) {					
 					   $.growl.notice({ title: "Ok!", message: "The video was removed!" });
-			           $("tr[data-row-id='"+video_id+"']").slideUp("slow");
+			           $("tr[data-row-id='"+media_id+"']").slideUp("slow");
 				    });	
 				}							
 			},

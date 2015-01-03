@@ -5,7 +5,7 @@
 @section('content')
 
 <script>
-	var init_video_id = {{ $video->id }};
+	var media_id = {{ $video->media_id }};
 </script>
 
 <div class="profile-full-name">
@@ -67,7 +67,7 @@
 							<div class="comment">
 								<img src="{{ Auth::user()->photo() }}" alt="" class="comment-avatar">
 								<div class="comment-body">
-									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.video_id={{ $video->id }}">
+									<form id="leave-comment-form" class="comment-text no-padding no-border" ng-submit="submitComment()" ng-init="commentData.media_id={{ $video->id }}">
 										<textarea class="form-control" rows="1" ng-model="commentData.message"></textarea>
 										<div class="expanding-input-hidden" style="margin-top: 10px;">
 											<label class="checkbox-inline pull-left">
@@ -107,7 +107,7 @@
 									</div>
 
 									<div class="comment-body" ng-show="$index == replyTo">
-										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.video_id={{ $video->id }}">
+										<form class="comment-text no-padding no-border" ng-submit="submitReply(comment.id)" ng-init="commentData.media_id={{ $video->id }}">
 											<textarea class="form-control" rows="1" ng-model="commentData.reply_text"></textarea>
 											<div style="margin-top: 10px;">
 												<label class="checkbox-inline pull-left">
@@ -278,17 +278,17 @@
 		});
 	}
 
-	function setHelp(video_id, status)
+	function setHelp(media_id, status)
 	{		
-		var url = '<?php echo URL::to('/'); ?>' + '/videos/help/' + video_id + '/' + status;
+		var url = '<?php echo URL::to('/'); ?>' + '/videos/help/' + media_id + '/' + status;
 		$.get(url, function(data) {
            refresh_videos();
 	    });			
 	}
 
-	function setStopHelp(video_id, status)
+	function setStopHelp(media_id, status)
 	{		
-		var url = '<?php echo URL::to('/'); ?>' + '/videos/stophelp/' + video_id + '/' + status;
+		var url = '<?php echo URL::to('/'); ?>' + '/videos/stophelp/' + media_id + '/' + status;
 		$.get(url, function(data) {
            refresh_videos();
 	    });			

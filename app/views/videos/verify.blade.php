@@ -26,9 +26,9 @@
 					}
 					elseif (strpos($video->original_link,'vimeo') !== false) {
 
-						$video_id =  substr(parse_url($video->original_link, PHP_URL_PATH), 1);
+						$media_id =  substr(parse_url($video->original_link, PHP_URL_PATH), 1);
 
-						$json_data = file_get_contents("http://vimeo.com/api/v2/video/".$video_id.'.json');
+						$json_data = file_get_contents("http://vimeo.com/api/v2/video/".$media_id.'.json');
 						$json = json_decode($json_data);
 
 					 //    $oembed_endpoint = 'http://vimeo.com/api/oembed';

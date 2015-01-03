@@ -13,6 +13,7 @@ define('TASK_VIDEO_MOV_PUBLISHED',   26);
 define('TASK_VIDEO_RET_AVAILABLE',   27);
 define('TASK_VIDEO_RET_PROOFREADING',28);
 define('TASK_VIDEO_DELETED',         29);
+define('TASK_VIDEO_COMMENT',         30);
 
 define('TASK_ARTICLE_ADDED',         40);
 define('TASK_ARTICLE_APPROVED',      41);
@@ -22,6 +23,7 @@ define('TASK_ARTICLE_MOV_PUBLISHED', 44);
 define('TASK_ARTICLE_RET_AVAILABLE', 45);
 define('TASK_ARTICLE_RET_SCHEDULED', 46);
 define('TASK_ARTICLE_DELETED',       47);
+define('TASK_ARTICLE_COMMENT',       48);
 
 
 // - MEDIAS STATUS - 
@@ -113,20 +115,20 @@ define('USER_AUTH_OWNER',        3);
 //                                     'return the video to synchronization',
 //                                     'return the video to proofreading')));
 
-// define('TASKS_TYPE_LABEL_DASHBOARD', serialize(
-//                                        array('suggested',
-//                                              'is translating',
-//                                              'is helping to sync',
-//                                              'is proofreading',
-//                                              'finished',
-//                                              'rejected',
-//                                              'approved',
-//                                              'moved to synchronization',
-//                                              'moved to proofreading',
-//                                              'finished',
-//                                              'returned to translating',
-//                                              'returned to synchronization',
-//                                              'returned to proofreading')));
+define('TASKS_TYPE_LABEL_DASHBOARD', serialize(
+                                       array('suggested',
+                                             'is translating',
+                                             'is helping to sync',
+                                             'is proofreading',
+                                             'finished',
+                                             'rejected',
+                                             'approved',
+                                             'moved to synchronization',
+                                             'moved to proofreading',
+                                             'finished',
+                                             'returned to translating',
+                                             'returned to synchronization',
+                                             'returned to proofreading')));
 
 
 // define('IMG_VIDEO_STATUS', serialize(
