@@ -157,7 +157,6 @@ Route::group(array('before' => 'auth'), function(){
 	});
 
 
-
 	/*
 	| ARTICLES
 	*/	
@@ -165,6 +164,27 @@ Route::group(array('before' => 'auth'), function(){
 		'getAvailable'  => 'articles-available',
 		'postNew' 		=> 'articles-new',		
 	));
+
+	/*
+	| ARTICLES - Ajax calls
+	*/
+
+	Route::get('/articles/tasks/{media_id}', array(
+		'as' => 'articles-tasks',
+		'uses' => 'ArticleController@getTasks'
+	));
+
+	Route::get('/articles/adjust/{media_id}', array(
+		'as' => 'articles-adjust',
+		'uses' => 'ArticleController@getAdjust'
+	));
+
+	Route::get('/articles/approved/{media_id}', array(
+		'as' => 'articles-approved',
+		'uses' => 'ArticleController@getApproved'
+	));
+
+
 
 	// Route::get('/articles', array(
 	// 	'as' => 'articles-available',

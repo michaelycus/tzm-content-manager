@@ -194,16 +194,16 @@
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
 						<div class="panel-padding no-padding-vr">
 
-							@foreach ($last_videos as $video)								
+							<!-- foreach ($last_videos as $video)								
 							<div class="thread">									
-								{{ '<img src="' . $video->thumbnail . '"  alt="" class="thread-avatar">' }}
+								{x{ '<img src="' . '$video->thumbnail' . '"  alt="" class="thread-avatar">' }x}
 								<div class="thread-body">
 									<span class="thread-time">[[ Helpers::time_elapsed_string($video->created_at) ]]</span>
-									<a href="{{ URL::route('videos-details', $video->id) }}" class="thread-title">{{ $video->title }}</a>
-									<div class="thread-info">suggested by <a href="{{ URL::route('users-profile', $video->suggestedBy()['id']) }}" title="">{{ $video->suggestedBy()['firstname'] }}</a></div>
+									<a href="{x{ URL::route('videos-details', $video->id) }x}" class="thread-title">{x{ '$video->title' }x}</a>
+									<div class="thread-info">suggested by <a href="{x{ URL::route('users-profile', $video->suggestedBy()['id']) }x}" title="">{x{ '$video->suggestedBy()['firstname']' }x}</a></div>
 								</div>
 							</div>
-							@endforeach
+							endforeach -->
 
 						</div>
 					</div> <!-- / .panel-body -->
@@ -211,8 +211,7 @@
 			</div> <!-- / .widget-threads -->
 		</div>
 
-		<div class="col-md-4">	
-			
+		<div class="col-md-4">				
 			<div class="panel" id="dashboard-recent">
 				<div class="panel-heading">
 					<span class="panel-title"><i class="panel-title-icon fa fa-tasks text-danger"></i>Last activities</span>						
@@ -221,23 +220,19 @@
 
 					<!-- Without padding -->
 					<div class="widget-threads panel-body tab-pane no-padding  fade active in">
-						<div class="panel-padding no-padding-vr">
+						<div class="panel-padding no-padding-vr">							
 
-							
-
-							<?php $tasks_label = unserialize(TASKS_TYPE_LABEL_DASHBOARD); ?>
-							@foreach ($last_tasks as $task)
+							<?php //$tasks_label = unserialize(TASKS_TYPE_LABEL_DASHBOARD); ?>
+							//foreach ($last_tasks as $task)
 							<div class="thread">
-								<img src="{{ $task->user->photo() }}" alt="" class="thread-avatar">
+								<img src="{x{ $task->user->photo() }x}" alt="" class="thread-avatar">
 								<div class="thread-body">
 									<span class="thread-time">[[ Helpers::time_elapsed_string($task->created_at) ]]</span>
-									<a href="{{ URL::route('users-profile', $task->user->id )}}" title="">{{ $task->user->firstname }}</a> {{ $tasks_label[$task->type] }}										
-									<div class="thread-info">the video <a href="{{ URL::route('videos-details', $task->media_id) }}" title="">{{ $task->video->title }}</a></div>
+									<a href="{x{ URL::route('users-profile', $task->user->id )}x}" title="">{x{ '$task->user->firstname'}x}</a> {x{ '$tasks_label[$task->type'] }}										
+									<div class="thread-info">the video <a href="{x{ URL::route('videos-details', $task->media_id) }x}" title="">{x{ '$task->video->title' }x}</a></div>
 								</div>
 							</div>
-							@endforeach
-
-							
+							//endforeach							
 
 						</div>
 					</div> <!-- / .panel-body -->
