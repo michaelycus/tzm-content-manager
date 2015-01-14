@@ -28,11 +28,11 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th></th>
+						<th>Criado por</th>
 						<th>Título</th>
 						<th>Links</th>
-						<th>Atividades</th>
-						<th></th>
+						<th style="text-align: right">Atividades</th>
+						<th style="text-align: right">Comentários</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,27 +49,17 @@
 							@endif
 						</td>
 						<td>
-							<div class="text-center tasks-panel" id="{{ $media->id }}"></div>
-							<!-- <div class="btn-group " style="width: 110px">
-								<button class="btn btn-flat btn-xs btn-labeled btn-warning btn-block"><span class="btn-label icon fa fa-exclamation-circle"></span>Precisa ajuste</button><br/><br/>
-								<button class="btn btn-flat btn-xs btn-labeled btn-success btn-block"><span class="btn-label icon fa fa-check-circle"></span>Aprovado</button>
-								
-							</div> -->
-
-							
-								<!-- <i class="icon fa fa-2x fa-exclamation text-warning"></i>
-								<img src="{{ $media->user->photo }}" alt="{{  $media->user->firstname }}" class="user-list">
-								<i class="btn-label icon fa fa-2x fa-check text-success"></i>
-								<img src="{{ $media->user->photo }}" alt="{{  $media->user->firstname }}" class="user-list"> -->
-							
-							
+							<span class="pull-right">
+								<div class="text-center tasks-panel" id="{{ $media->id }}"></div>
+							</span>
 						</td>
-						<td>							
-							<a href="#" onclick="changeArticleId({{ $media->id }})" ng-click="reload({{ $media->id }})" data-toggle="modal" data-target="#commentModal">
-								<small>{{ $media->article->num_comments }} <span class="btn-label icon fa fa-comment"></small>
-							</a>							
-						</td>					
-						
+						<td>	
+							<span class="pull-right">
+								<a href="#" onclick="changeArticleId({{ $media->id }})" ng-click="reload({{ $media->id }})" data-toggle="modal" data-target="#commentModal">
+								<small>{{ count($media->comments) }} <span class="btn-label icon fa fa-comment"></small>
+							</a>
+							</span>															
+						</td>
 					</tr>							
 					@endforeach				
 				</tbody>
