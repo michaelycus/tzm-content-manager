@@ -45,6 +45,23 @@ define('USER_AUTH_ADMIN',        2);
 define('USER_AUTH_OWNER',        3);
 
 
+// RESOLVER
+define('IMG_VIDEO_STATUS', serialize(
+                              array('fa-star', 
+                                     'fa-text-width',                                                  
+                                     'fa-clock-o',
+                                     'fa-eye',
+                                     'fa-check',
+                                     'fa-thumbs-down',
+                                     'fa-thumbs-up',
+                                    'fa-arrow-right',
+                                    'fa-arrow-right',
+                                    'fa-check',
+                                    'fa-arrow-left',
+                                    'fa-arrow-left',
+                                    'fa-arrow-left')));
+
+
 // define('MEDIA_TYPE_ARTICLE',        1);
 // define('MEDIA_TYPE_ARTICLE_PANEL',  2);
 // define('MEDIA_TYPE_VIDEO',          3);
@@ -115,36 +132,23 @@ define('USER_AUTH_OWNER',        3);
 //                                     'return the video to synchronization',
 //                                     'return the video to proofreading')));
 
-define('TASKS_TYPE_LABEL_DASHBOARD', serialize(
-                                       array('suggested',
-                                             'is translating',
-                                             'is helping to sync',
-                                             'is proofreading',
-                                             'finished',
-                                             'rejected',
-                                             'approved',
-                                             'moved to synchronization',
-                                             'moved to proofreading',
-                                             'finished',
-                                             'returned to translating',
-                                             'returned to synchronization',
-                                             'returned to proofreading')));
+// define('TASKS_TYPE_LABEL_DASHBOARD', serialize(
+//                                        array('suggested',
+//                                              'is translating',
+//                                              'is helping to sync',
+//                                              'is proofreading',
+//                                              'finished',
+//                                              'rejected',
+//                                              'approved',
+//                                              'moved to synchronization',
+//                                              'moved to proofreading',
+//                                              'finished',
+//                                              'returned to translating',
+//                                              'returned to synchronization',
+//                                              'returned to proofreading')));
 
 
-// define('IMG_VIDEO_STATUS', serialize(
-//                               array('fa-star', 
-//               										  'fa-text-width',										   
-//               										  'fa-clock-o',
-//               										  'fa-eye',
-//               										  'fa-check',
-//               										  'fa-thumbs-down',
-//               										  'fa-thumbs-up',
-//                                     'fa-arrow-right',
-//                                     'fa-arrow-right',
-//                                     'fa-check',
-//                                     'fa-arrow-left',
-//                                     'fa-arrow-left',
-//                                     'fa-arrow-left')));
+
 
 // define('VIDEO_MARKS', serialize(
 //                           array('I need some assistence!', 

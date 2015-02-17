@@ -1,1 +1,2 @@
-not FOUND
+<?php 
+echo 'not FOUND';

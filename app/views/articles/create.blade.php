@@ -11,7 +11,7 @@
 
 			<!-- Form::open(['route' => 'articles-new']) -->	
 
-			<form class="form-horizontal" method="post" action="{{ URL::route('articles-new') }}">			
+			<form class="form-horizontal" method="post" action="{{ URL::route('articles-create') }}">			
 
 				<div class="modal-body">
 					

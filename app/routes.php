@@ -1,13 +1,6 @@
 <?php
 
-
 Route::get('/', array('as' => 'home', 'uses' => 'AccountController@getIndex'));
-
-Route::get('testes', function()
-{
-    return 'testes!';
-});
-
 
 /*
 | Authenticated group
@@ -43,107 +36,58 @@ Route::group(array('before' => 'auth'), function(){
 		'uses' => 'AccountController@getSignOut'
 	));
 
+	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
 	/*
-	| USERS (GET)
+	| VIDEOS 
 	*/
-	Route::get('/users/manage', array(
-		'as' => 'users-manage',
-		'uses' => 'UserController@getUsers'
+
+	Route::get('/videos', array(
+	 	'as' => 'videos-available',
+	 	'uses' => 'VideoController@getAvailable'
 	));
 
-	/*
-	| VIDEOS - Status
-	*/
+	Route::get('/videos', array(
+	 	'as' => 'videos-published',
+	 	'uses' => 'VideoController@getPublished'
+	));
+															//
+	Route::get('/videos/tasks/{media_id}/{status}', array( 	// AJAX CALLS
+		'as' => 'videos-tasks',								//		
+		'uses' => 'VideoController@getTasks'
+	));
 
-	Route::resource('videos', 'VideosController',
-                array('only' => array('index', 'show')));
-
-	// Route::get('/videos/translating', array(
-	// 	'as' => 'videos-translating',
-	// 	'uses' => 'VideoController@getTranslating'
-	// ));
-
-	// Route::get('/videos/synchronizing', array(
-	// 	'as' => 'videos-synchronizing',
-	// 	'uses' => 'VideoController@getSynchronizing'
-	// ));
-
-	// Route::get('/videos/proofreading', array(
-	// 	'as' => 'videos-proofreading',
-	// 	'uses' => 'VideoController@getProofreading'
-	// ));
-
-	// Route::get('/videos/finished', array(
-	// 	'as' => 'videos-finished',
-	// 	'uses' => 'VideoController@getFinished'
-	// ));
+	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
 
 	/*
-	| VIDEOS - Details
-	*/
+	| ARTICLES
+	*/	
+	Route::get('/articles', array(
+	 	'as' => 'articles-available',
+	 	'uses' => 'ArticleController@getAvailable'
+	));
 
-	// Route::get('/videos/details/{id}', array(
-	// 	'as' => 'videos-details',
-	// 	'uses' => 'VideoController@getDetails'
-	// ));
+	Route::get('/articles', array(
+	 	'as' => 'articles-available',
+	 	'uses' => 'ArticleController@getPublished'
+	));
 
-    /*
-	| VIDEOS - Ajax calls
-	*/
+	Route::post('/articles/create', array(
+		'as' => 'articles-create',
+		'uses' => 'ArticleController@postCreate'
+	));
+															//
+	Route::get('/articles/tasks/{media_id}', array(			// AJAX CALLS
+		'as' => 'articles-tasks',							//
+		'uses' => 'ArticleController@getTasks'
+	));
 
-	// Route::get('/videos/tasks/{media_id}/{status}', array(
-	// 	'as' => 'videos-tasks',
-	// 	'uses' => 'VideoController@getTasks'
-	// ));
-
-	// Route::get('/videos/detail-tasks/{media_id}/{status}', array(
-	// 	'as' => 'videos-detail-tasks',
-	// 	'uses' => 'VideoController@getDetailTasks'
-	// ));
-
-	// Route::get('/videos/help/{id}/{status}', array(
-	// 	'as' => 'videos-help',
-	// 	'uses' => 'VideoController@getHelp'
-	// ));
-
-	// Route::get('/videos/stophelp/{id}/{status}', array(
-	// 	'as' => 'videos-stop-help',
-	// 	'uses' => 'VideoController@getStopHelp'
-	// ));
-
-	// Route::get('/videos/remove/{id}', array(
-	// 	'as' => 'videos-remove',
-	// 	'uses' => 'VideoController@getRemove'
-	// ));
-
-	// Route::get('/videos/move-to/{id}/{status}', array(
-	// 	'as' => 'videos-move-to',
-	// 	'uses' => 'VideoController@getMoveTo'
-	// ));
-
-	// Route::get('/videos/return-to/{id}/{status}', array(
-	// 	'as' => 'videos-return-to',
-	// 	'uses' => 'VideoController@getReturnTo'
-	// ));
-
-	//  Route::post('/videos/suggestion', array(
-	//  	'as' => 'videos-suggestion',
-	//  	'uses' => 'VideoController@postSuggestion'
-	//  ));
-
+	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
 
 	/*
 	| COMMENTS
 	*/
 	Route::group(array('prefix' => 'api'), function() {
-
-		// since we will be using this just for CRUD, we won't need create and edit
-		// Angular will handle both of those forms
-		// this ensures that a user can't access api/create or api/edit when there's nothing there
-
-		// Route::resource('comments', 'CommentController', 
-		// 	array('only' => array('index', 'store', 'show', 'destroy')));
-
 		Route::get('/comments/{media_id}', array(
 			'as' => 'get-comments',
 			'uses' => 'CommentController@index'
@@ -153,58 +97,9 @@ Route::group(array('before' => 'auth'), function(){
 			'as' => 'store-comment',
 			'uses' => 'CommentController@store'
 		));
-
-		//Route::resource('comments', 'CommentController');
-
-		//Route::resource('videos.comments', 'VideoCommentController');
 	});
 
-
-	/*
-	| ARTICLES
-	*/	
-	Route::controller("articles", "ArticleController", array(
-		'getAvailable'  => 'articles-available',
-		'postNew' 		=> 'articles-new',		
-	));
-
-	/*
-	| ARTICLES - Ajax calls
-	*/
-
-	Route::get('/articles/tasks/{media_id}', array(
-		'as' => 'articles-tasks',
-		'uses' => 'ArticleController@getTasks'
-	));
-
-	Route::get('/articles/adjust/{media_id}', array(
-		'as' => 'articles-adjust',
-		'uses' => 'ArticleController@getAdjust'
-	));
-
-	Route::get('/articles/approved/{media_id}', array(
-		'as' => 'articles-approved',
-		'uses' => 'ArticleController@getApproved'
-	));
-
-
-
-	// Route::get('/articles', array(
-	// 	'as' => 'articles-available',
-	// 	'uses' => 'ArticleController@getAvailable'
-	// ));
-
-	// Route::post('/articles/new', array(
-	// 	'as' => 'articles-new',
-	// 	'uses' => 'ArticleController@postNew'
-	// ));
-
-	// Route::get('/articles/teste', array(
-	// 	'as' => 'articles-teste',
-	// 	'uses' => 'ArticleController@getTeste'
-	// ));
-
-
+	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
 
 	/*
 	| USERS
@@ -214,6 +109,11 @@ Route::group(array('before' => 'auth'), function(){
 		'uses' => 'UserController@getUser'
 	));
 
+	Route::get('/users/manage', array(
+		'as' => 'users-manage',
+		'uses' => 'UserController@getUsers'
+	));
+
 	/*
 	| ABOUT
 	*/
@@ -221,6 +121,8 @@ Route::group(array('before' => 'auth'), function(){
 		'as' => 'about',
 		'uses' => 'AccountController@about'
 	));
+
+	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
 
 	/*
 	| TEST
@@ -301,3 +203,132 @@ Route::group(array('before' => 'guest'), function(){
 	));
 
 });
+
+Route::get('testes', function()
+{
+    return 'testes!';
+});
+
+
+
+
+
+	// Route::get('/videos/translating', array(
+	// 	'as' => 'videos-translating',
+	// 	'uses' => 'VideoController@getTranslating'
+	// ));
+
+	// Route::get('/videos/synchronizing', array(
+	// 	'as' => 'videos-synchronizing',
+	// 	'uses' => 'VideoController@getSynchronizing'
+	// ));
+
+	// Route::get('/videos/proofreading', array(
+	// 	'as' => 'videos-proofreading',
+	// 	'uses' => 'VideoController@getProofreading'
+	// ));
+
+	// Route::get('/videos/finished', array(
+	// 	'as' => 'videos-finished',
+	// 	'uses' => 'VideoController@getFinished'
+	// ));
+
+	/*
+	| VIDEOS - Details
+	*/
+
+	// Route::get('/videos/details/{id}', array(
+	// 	'as' => 'videos-details',
+	// 	'uses' => 'VideoController@getDetails'
+	// ));
+
+    /*
+	| VIDEOS - Ajax calls
+	*/
+
+	// Route::get('/videos/tasks/{media_id}/{status}', array(
+	// 	'as' => 'videos-tasks',
+	// 	'uses' => 'VideoController@getTasks'
+	// ));
+
+	// Route::get('/videos/detail-tasks/{media_id}/{status}', array(
+	// 	'as' => 'videos-detail-tasks',
+	// 	'uses' => 'VideoController@getDetailTasks'
+	// ));
+
+	// Route::get('/videos/help/{id}/{status}', array(
+	// 	'as' => 'videos-help',
+	// 	'uses' => 'VideoController@getHelp'
+	// ));
+
+	// Route::get('/videos/stophelp/{id}/{status}', array(
+	// 	'as' => 'videos-stop-help',
+	// 	'uses' => 'VideoController@getStopHelp'
+	// ));
+
+	// Route::get('/videos/remove/{id}', array(
+	// 	'as' => 'videos-remove',
+	// 	'uses' => 'VideoController@getRemove'
+	// ));
+
+	// Route::get('/videos/move-to/{id}/{status}', array(
+	// 	'as' => 'videos-move-to',
+	// 	'uses' => 'VideoController@getMoveTo'
+	// ));
+
+	// Route::get('/videos/return-to/{id}/{status}', array(
+	// 	'as' => 'videos-return-to',
+	// 	'uses' => 'VideoController@getReturnTo'
+	// ));
+
+	//  Route::post('/videos/suggestion', array(
+	//  	'as' => 'videos-suggestion',
+	//  	'uses' => 'VideoController@postSuggestion'
+	//  ));
+
+
+	
+
+	
+	// Route::controller("articles", "ArticleController", array(
+	// 	'getAvailable'  => 'articles-available',
+	// 	'postNew' 		=> 'articles-new',		
+	// ));
+
+	/*
+	| ARTICLES - Ajax calls
+	*/
+
+	// Route::get('/articles/tasks/{media_id}', array(
+	// 	'as' => 'articles-tasks',
+	// 	'uses' => 'ArticleController@getTasks'
+	// ));
+
+	// Route::get('/articles/adjust/{media_id}', array(
+	// 	'as' => 'articles-adjust',
+	// 	'uses' => 'ArticleController@getAdjust'
+	// ));
+
+	// Route::get('/articles/approved/{media_id}', array(
+	// 	'as' => 'articles-approved',
+	// 	'uses' => 'ArticleController@getApproved'
+	// ));
+
+
+
+	// Route::get('/articles', array(
+	// 	'as' => 'articles-available',
+	// 	'uses' => 'ArticleController@getAvailable'
+	// ));
+
+	// Route::post('/articles/new', array(
+	// 	'as' => 'articles-new',
+	// 	'uses' => 'ArticleController@postNew'
+	// ));
+
+	// Route::get('/articles/teste', array(
+	// 	'as' => 'articles-teste',
+	// 	'uses' => 'ArticleController@getTeste'
+	// ));
+
+

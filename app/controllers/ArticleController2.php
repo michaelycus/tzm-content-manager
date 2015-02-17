@@ -4,20 +4,33 @@ class ArticleController extends \BaseController {
 
 	public function getAvailable()
 	{
+		// $articles_available = Article::where('status', '=', ARTICLE_STATUS_AVAILABLE)->get();
+		// $articles_reviewed  = Article::where('status', '=', ARTICLE_STATUS_REVIEWED)->get();
+  //       $articles_scheduled = Article::where('status', '=', ARTICLE_STATUS_SCHEDULED)->get();
+		
+        //$medias = Media::all();
         $medias = Media::where('status', '=', MEDIA_ARTICLE_AVAILABLE)->get();
+        //$articles = MEDIAS::all();//where('status', '=', MEDIA_ARTICLE_AVAILABLE)->get();
+
+  //       foreach ($articles as $article) {
+  //           $article->num_comments = Comment::where('media_id', '=', $article->id)->count();
+  //       }
 
 		$users = User::all();
 
         return View::make('articles.available', array('medias' => $medias,
                                                       'users' => $users));
+
+
+        //return View::make('articles.available');
+
+		// return View::make('articles.available', array('articles_available' => $articles_available,
+		// 											  'articles_reviewed'  => $articles_reviewed,
+		// 											  'articles_scheduled' => $articles_scheduled,
+		// 											  'users' => $users));
 	}
 
-	public function getPublished()
-	{
-		
-	}
-
-	public function postCreate()
+	public function postNew()
 	{		
 		$rules = array(
             'title'   		 => 'required',
@@ -49,12 +62,7 @@ class ArticleController extends \BaseController {
         }
 	}
 
-   /**
-	*
-	* 	AJAX CALLS 
-	*
-	*/
-	public function getTasks($media_id)
+    public function getTasks($media_id)
     {
         if (Request::ajax())
         {
@@ -134,4 +142,27 @@ class ArticleController extends \BaseController {
         }
     }
 
+    public function getAdjust($media_id)
+    {
+        if (Request::ajax())
+        {
+            Task::create(array(
+                'type' => TASK_ARTICLE_NEED_ADJUST,
+                'user_id' => Auth::id(),
+                'media_id' => $media_id
+            ));
+        }
+    }
+
+    public function getApproved($media_id)
+    {
+        if (Request::ajax())
+        {
+            Task::create(array(
+                'type' => TASK_ARTICLE_APPROVED,
+                'user_id' => Auth::id(),
+                'media_id' => $media_id
+            ));
+        }
+    }
 }

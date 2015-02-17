@@ -116,27 +116,27 @@
 			</div>
 			<ul class="navigation">
 				<li>
-					<a href="{{ URL::route('home') }}"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+					<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
 				</li>
 				<li>
-					<a href="{{ URL::route('home') }}"><i class="menu-icon fa fa-comments-o"></i><span class="mm-text">Time Linguístico</span></a>
-				</li>
-
-				<li>
-					<a href="{{ URL::route('videos-translating') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
-				</li>
-				<li>
-					<a href="{{ URL::route('videos-translating') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
+					<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-comments-o"></i><span class="mm-text">Time Linguístico</span></a>
 				</li>
 
 				<li>
-					<a href="{{ URL::route('videos-synchronizing') }}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Blog</span></a>
+					<a href="{{ URL::route('videos-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
+				</li>
+				<li>
+					<a href="{{-- URL::route('home') --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
+				</li>
+
+				<li>
+					<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Blog</span></a>
 				</li>
 				<li>
 					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
 				</li>
 				<li>
-					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
+					<a href="{{-- URL::route('home) --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
 				</li> 
 
 				

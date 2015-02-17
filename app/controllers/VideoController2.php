@@ -1,6 +1,6 @@
 <?php
 
-class VideoController extends BaseController {
+class VideoController2 extends BaseController {
 
 	public function getTranslating()
 	{
