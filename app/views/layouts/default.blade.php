@@ -174,11 +174,9 @@
 <![endif]-->
 
 
-
 <!-- Pixel Admin's javascripts -->
 <script src="{{ URL::asset('assets/javascripts/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('assets/javascripts/pixel-admin.min.js') }}"></script>
-
 
 
 @yield('script')

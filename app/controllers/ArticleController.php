@@ -49,6 +49,41 @@ class ArticleController extends \BaseController {
         }
 	}
 
+    public function edit($id)
+    {
+        $media = Media::find($id);
+
+        //$users = User::all();
+
+        $users = User::lists('name', 'id');
+
+        return View::make('articles.edit', array('media' => $media,
+                                                 'users' => $users));
+    }
+
+    public function update($id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+//         xxxxxxx
+
+//         VER 
+//         https://www.packtpub.com/books/content/laravel-4-creating-simple-crud-application-hours
+
+
+//         {{ Form::open(array('method' => 'DELETE', 'route' =>
+//  array('users.destroy', $user->id))) }}
+// {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+// {{ Form::close() }}
+
+        Media::find($id)->delete();
+        Session::flash('message', 'Artigo removido com sucesso!');
+        return Redirect::route('articles-available');
+    }
+
    /**
 	*
 	* 	AJAX CALLS 
@@ -131,6 +166,30 @@ class ArticleController extends \BaseController {
             }            
 
             return $text;
+        }
+    }
+
+    public function getAdjust($media_id)
+    {
+        if (Request::ajax())
+        {
+            Task::create(array(
+                'type' => TASK_ARTICLE_NEED_ADJUST,
+                'user_id' => Auth::id(),
+                'media_id' => $media_id
+            ));
+        }
+    }
+
+    public function getApproved($media_id)
+    {
+        if (Request::ajax())
+        {
+            Task::create(array(
+                'type' => TASK_ARTICLE_APPROVED,
+                'user_id' => Auth::id(),
+                'media_id' => $media_id
+            ));
         }
     }
 

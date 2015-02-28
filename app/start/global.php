@@ -83,6 +83,7 @@ require app_path().'/filters.php';
 
 // load constants - Michael
 require app_path().'/config/constants.php';
+require app_path().'/macros.php';
 
 App::missing(function($e) {
     $url = Request::fullUrl();

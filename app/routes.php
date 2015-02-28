@@ -47,7 +47,7 @@ Route::group(array('before' => 'auth'), function(){
 	 	'uses' => 'VideoController@getAvailable'
 	));
 
-	Route::get('/videos', array(
+	Route::get('/videos/published', array(
 	 	'as' => 'videos-published',
 	 	'uses' => 'VideoController@getPublished'
 	));
@@ -67,8 +67,8 @@ Route::group(array('before' => 'auth'), function(){
 	 	'uses' => 'ArticleController@getAvailable'
 	));
 
-	Route::get('/articles', array(
-	 	'as' => 'articles-available',
+	Route::get('/articles/published', array(
+	 	'as' => 'articles-published',
 	 	'uses' => 'ArticleController@getPublished'
 	));
 
@@ -81,6 +81,20 @@ Route::group(array('before' => 'auth'), function(){
 		'as' => 'articles-tasks',							//
 		'uses' => 'ArticleController@getTasks'
 	));
+
+	Route::get('/articles/adjust/{media_id}', array(
+		'as' => 'articles-adjust',
+		'uses' => 'ArticleController@getAdjust'
+	));
+
+	Route::get('/articles/approved/{media_id}', array(
+		'as' => 'articles-approved',
+		'uses' => 'ArticleController@getApproved'
+	));
+
+
+	Route::resource('articles', 'ArticleController',
+		['only' => ['edit','update','destroy']]);
 
 	// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
 
@@ -184,7 +198,6 @@ Route::group(array('before' => 'guest'), function(){
 		'as' => 'account-activate',
 		'uses' => 'AccountController@getActivate'
 	));
-
 
 	/*
 	| Login Facebook (GET)
