@@ -132,13 +132,12 @@
 				<li>
 					<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Blog</span></a>
 				</li>
-				<li>
+				<li {{Route::currentRouteName() == 'articles-available' ? ' active' : ''}}>
 					<a href="{{ URL::route('articles-available') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Em aberto</span></a>
 				</li>
 				<li>
 					<a href="{{-- URL::route('home) --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
 				</li> 
-
 				
 			</ul> <!-- / .navigation -->
 

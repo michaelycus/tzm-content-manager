@@ -63,7 +63,45 @@ class ArticleController extends \BaseController {
 
     public function update($id)
     {
+         Debugbar::warning('Wokkk');
 
+         //return Redirect::to('articles/'.$id.'/edit');
+
+        // validate        
+        $rules = array(
+            'title'             => 'required',
+            'link_wordpress'    => 'required',
+            'user_id'           => 'required|numeric'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('articles/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            // store
+            $media = Media::find($id);
+            $media->article->title             = Input::get('title');
+            $media->article->link_wordpress    = Input::get('link_wordpress');
+            $media->article->link_extra        = Input::get('link_extra');
+            $media->user_id           = 1; //Input::get('user_id');
+            $media->save();
+
+            //var_dump($media);
+            //dd('end');
+
+            // redirect
+            Session::flash('message', 'Successfully updated article!');
+
+            Debugbar::warning('Watch out…');
+
+            //dd('atc');
+
+            //return Redirect::to('articles');
+            return Redirect::to('articles/'.$id.'/edit');
+        }
     }
 
     public function destroy($id)

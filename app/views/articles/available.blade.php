@@ -165,7 +165,7 @@
 		$("#leave-comment-form").expandingInput({
 			target: 'textarea',
 			hidden_content: '> div',
-			placeholder: 'Write message',
+			placeholder: 'Escreva um comentário',
 			onAfterExpand: function () {
 				$('#leave-comment-form textarea').attr('rows', '3').autosize();
 			}

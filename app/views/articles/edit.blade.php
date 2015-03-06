@@ -6,6 +6,7 @@
 	<h1><span class="text-light-gray">Artigo: {{ $media->article->title }}</span></h1>
 </div> <!-- / .page-header -->
 
+{{ Debugbar::warning('feito'); }}
 
 <div class="row">
 	<div class="col-md-6">
